@@ -32,8 +32,15 @@ html, body {
   }
 }
 
-.wrap {
+.description {
   padding: 100px;
+  display: inline-block;
+  width: 30%;
+}
+
+.simulation {
+  width: 65%;
+  display: inline-block;
 }
 
 .content {

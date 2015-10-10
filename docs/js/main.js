@@ -6,8 +6,12 @@
 import 'babel/polyfill';
 import {Simulation} from '../../lib/Simulation';
 
+let app = null;
+
 const run = async () => {
   try {
+
+    // app = angular.module('SimulationApp', ['ngResource']);
 
     let sim = new Simulation({
       simulationOptions: {
@@ -32,6 +36,7 @@ const run = async () => {
     });
     console.log('simulation', sim);
 
+    sim.start();
     sim.runFor(10);
 
   } catch (err) {

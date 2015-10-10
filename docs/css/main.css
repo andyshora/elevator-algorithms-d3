@@ -419,8 +419,14 @@ html, body {
     height: 100%;
     overflow: hidden; }
 
-.wrap {
-  padding: 100px; }
+.description {
+  padding: 100px;
+  display: inline-block;
+  width: 30%; }
+
+.simulation {
+  width: 65%;
+  display: inline-block; }
 
 .content {
   vertical-align: top;
@@ -724,7 +730,7 @@ h1, h2, h3, h4, h5, p {
     padding-bottom: 0;
     letter-spacing: -0.3px; } }
 .xxlarge, h1 {
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 300;
   line-height: 1.2381em;
   /* 52px */
@@ -734,7 +740,7 @@ h1, h2, h3, h4, h5, p {
 
 @media only screen and (min-width: 800px) {
   .xxlarge, h1 {
-    font-size: 68px;
+    font-size: 42px;
     font-weight: 300;
     line-height: 1.1471em;
     /* 78px */

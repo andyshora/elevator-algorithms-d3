@@ -1,4 +1,5 @@
 import {Building} from './Building';
+import {Viz} from './Viz';
 
 class Simulation {
 
@@ -6,6 +7,13 @@ class Simulation {
     this._t = 0;
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
+
+    this.viz = new Viz();
+  }
+
+  start() {
+    this.viz.animate();
+    // this.viz.addTestParticles();
   }
 
   runFor(i) {
