@@ -1,4 +1,5 @@
 node_modules/
 src/app/bower_components/
-.sass-cache
 src_old/
+*.sass-cache
+*.log

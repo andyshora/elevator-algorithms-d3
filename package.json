@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Elevator Algorithms",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andyshora/elevator-algorithms-d3.git"
@@ -36,8 +32,6 @@
     "eslint-plugin-react": "^3.4.2",
     "front-matter": "^1.0.0",
     "gaze": "^0.5.1",
-    "gulp": "~3.9.0",
-    "gulp-sass": "~2.0.4",
     "highlight.js": "^8.8.0",
     "lodash.template": "^3.6.2",
     "markdown-it": "^4.4.0",
