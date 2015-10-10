@@ -1,9 +1,11 @@
-'use strict';
+"use strict";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Simulation = function Simulation() {
+var Simulation = function Simulation(args) {
   _classCallCheck(this, Simulation);
 
-  console.log('simulation constructor');
+  this.tickFrequency = args.simulationOptions.tickFrequency;
+
+  this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 };
