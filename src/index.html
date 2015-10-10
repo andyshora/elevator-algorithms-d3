@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="WorldViewerApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Elevator Algorithms</title>
+  <meta name="description" content="Elevator Algorithms">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" href="app/css/main.css">
+
+  <script src="app/bower_components/angular/angular.min.js"></script>
+  <script src="app/bower_components/angular-resource/angular-resource.min.js"></script>
+
+  <script src="app/bower_components/three.js/three.js"></script>
+  <script src="app/bower_components/underscore/underscore-min.js"></script>
+  <script src="app/bower_components/three.js-controls/src/OrbitControls.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script type="x-shader/x-vertex" id="vertexshader">
+
+      attribute float alpha;
+      attribute float pointSize;
+      attribute vec3 customColor;
+
+      varying float vAlpha;
+      varying vec3 vColor;
+
+      void main() {
+
+        vAlpha = alpha;
+        vColor = customColor;
+
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = pointSize;
+
+        gl_Position = projectionMatrix * mvPosition;
+
+      }
+
+  </script>
+
+  <script type="x-shader/x-fragment" id="fragmentshader">
+
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
+      uniform float worldSize;
+
+      varying float vAlpha;
+      varying vec3 vColor;
+
+      void main() {
+
+        vec4 outColor = texture2D( pointTexture, gl_PointCoord );
+        gl_FragColor = outColor * vec4( color * vColor.xyz, vAlpha );
+
+        float depth = gl_FragCoord.z / gl_FragCoord.w;
+        const vec3 fogColor = vec3( 0.1 );
+
+        float fogFactor = 0.0;// smoothstep( worldSize * 1.8, worldSize * 3.5, depth );
+        gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
+
+      }
+
+  </script>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
+</head>
+<body ng-controller="MainCtrl" ng-cloak>
+  <div class="simulation" id="WebGLCanvas"></div>
+
+  <div class="wrap">
+    <h1>Hello</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus sint, voluptatum autem expedita consequuntur perspiciatis voluptas consequatur quisquam, ipsum doloribus.</p>
+  </div>
+
+
+  <script src="app/js/main.js"></script>
+
+</body>
+</html>
