@@ -1,12 +1,18 @@
-require('./bundle');
+/**
+ * Babel Starter Kit | https://github.com/kriasoft/babel-starter-kit
+ * Copyright (c) Konstantin Tarkus <hello@tarkus.me> | The MIT License
+ */
 
-// var Simulation = require('Simulation')
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import {Simulation} from '../src/Simulation';
 
-describe('The simulation', function() {
+describe('The simulation', () => {
 
-  sim = new Simulation();
-/*
-  beforeEach(function() {
+  let sim = null;
+
+  beforeEach(() => {
+
     sim = new Simulation({
       simulationOptions: {
         tickFrequency: 1000
@@ -27,10 +33,12 @@ describe('The simulation', function() {
         finishTime: 18
       }
     });
-    console.log('Simulation', sim);
-  });*/
+
+  });
 
   it('should be an object', function() {
-    expect(sim).toBeDefined();
+    expect(typeof sim).to.be.equal('object');
   });
+
 });
+

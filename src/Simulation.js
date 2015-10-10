@@ -3,7 +3,6 @@ import {Building} from './Building';
 class Simulation {
 
   constructor(args) {
-    console.log('Simulation constructor');
     this.tickFrequency = args.simulationOptions.tickFrequency;
 
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
