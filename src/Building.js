@@ -18,7 +18,10 @@ class Building {
     for (var i = 0; i < this.numPeople; i++) {
       this.people.push(new Person(personOptions));
     }
+  }
 
+  workElevators(t) {
+    console.log('workElevators', t);
   }
 
 }

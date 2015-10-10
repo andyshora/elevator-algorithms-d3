@@ -3,9 +3,20 @@ import {Building} from './Building';
 class Simulation {
 
   constructor(args) {
-    this.tickFrequency = args.simulationOptions.tickFrequency;
-
+    this._t = 0;
+    this.tickTime = args.simulationOptions.tickTime;
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
+  }
+
+  runFor(i) {
+    let j = 0;
+    let interval = setInterval(() => {
+      this.tick();
+      j++;
+      if (j > i) {
+        clearInterval(interval);
+      }
+    }, this.tickTime);
   }
 
   /**
@@ -14,8 +25,14 @@ class Simulation {
    * or manually for testing purposes
    * @return {void}
    */
-  tick() {}
+  tick() {
+    this.building.workElevators(this.currentTime);
+    this._t++;
+  }
 
+  get currentTime() {
+    return this._t;
+  }
 
 }
 

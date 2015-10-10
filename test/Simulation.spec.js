@@ -3,11 +3,11 @@
  * Copyright (c) Konstantin Tarkus <hello@tarkus.me> | The MIT License
  */
 
-import { describe, it } from 'mocha';
-import { expect } from 'chai';
+import {describe, it} from 'mocha';
+import {expect} from 'chai';
 import {Simulation} from '../src/Simulation';
 
-describe('The simulation', () => {
+describe('The Simulation', () => {
 
   let sim = null;
 
@@ -38,6 +38,16 @@ describe('The simulation', () => {
 
   it('should be an object', function() {
     expect(typeof sim).to.be.equal('object');
+  });
+
+  it('should be able to tick', function() {
+    expect(sim.currentTime).to.be.equal(0);
+    sim.tick();
+    expect(sim.currentTime).to.be.equal(1);
+  });
+
+  it('should have a building', function() {
+    expect(typeof sim.building).to.be.equal('object');
   });
 
 });
