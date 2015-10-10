@@ -1,0 +1,2 @@
+
+var sim = new Simulation();

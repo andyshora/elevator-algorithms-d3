@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="WorldViewerApp">
+<html ng-app="SimulationApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="stylesheet" href="app/css/main.css">
 
-  <script src="app/bower_components/angular/angular.min.js"></script>
+  <!--<script src="app/bower_components/angular/angular.min.js"></script>
   <script src="app/bower_components/angular-resource/angular-resource.min.js"></script>
 
   <script src="app/bower_components/three.js/three.js"></script>
@@ -64,9 +64,10 @@
 
       }
 
-  </script>
+  </script>-->
 
   <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
+
 </head>
 <body ng-controller="MainCtrl" ng-cloak>
   <div class="simulation" id="WebGLCanvas"></div>
@@ -76,7 +77,7 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus sint, voluptatum autem expedita consequuntur perspiciatis voluptas consequatur quisquam, ipsum doloribus.</p>
   </div>
 
-
+  <script src="app/js/lib/Simulation.js"></script>
   <script src="app/js/main.js"></script>
 
 </body>

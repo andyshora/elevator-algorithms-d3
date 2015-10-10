@@ -3,16 +3,20 @@
  * @author mr.doob / http://mrdoob.com/
  */
 
-Detector = {
+export default class Detector {
 
-  canvas: !! window.CanvasRenderingContext2D,
-  webgl: ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )(),
-  workers: !! window.Worker,
-  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+  constructor() {
+    this.canvas = !! window.CanvasRenderingContext2D;
+    this.webgl = ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )();
+    this.workers = !! window.Worker;
+    this.fileapi = window.File && window.FileReader && window.FileList && window.Blob;
+  }
 
-  getWebGLErrorMessage: function () {
 
-    var element = document.createElement( 'div' );
+
+  getWebGLErrorMessage() {
+
+    var element = document.createElement('div');
     element.id = 'webgl-error-message';
     element.style.fontFamily = 'monospace';
     element.style.fontSize = '13px';
@@ -38,9 +42,9 @@ Detector = {
 
     return element;
 
-  },
+  }
 
-  addGetWebGLMessage: function ( parameters ) {
+  addGetWebGLMessage (parameters) {
 
     var parent, id, element;
 
@@ -49,7 +53,7 @@ Detector = {
     parent = parameters.parent !== undefined ? parameters.parent : document.body;
     id = parameters.id !== undefined ? parameters.id : 'oldie';
 
-    element = Detector.getWebGLErrorMessage();
+    element = this.getWebGLErrorMessage();
     element.id = id;
 
     parent.appendChild( element );
