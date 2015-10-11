@@ -28,7 +28,8 @@ const run = async () => {
       elevatorOptions: {
         maxSpeed: 0.5,
         mode: 'normal',
-        capacity: 8
+        capacity: 8,
+        numFloors: 4
       },
       personOptions: {
         startTime: 9,

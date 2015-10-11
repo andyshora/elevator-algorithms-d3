@@ -1,10 +1,16 @@
+import _ from 'lodash';
+
 class Utils {
   static log(message, ...objs) {
     if (typeof window === 'undefined') {
       return;
     }
     if (window.debug) {
-      console.log(message, objs);
+      if (objs.length) {
+        console.log(message, objs);
+      } else {
+        console.log(message);
+      }
 
     }
   }

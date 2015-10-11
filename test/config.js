@@ -13,7 +13,8 @@ export default {
   elevatorOptions: {
     maxSpeed: 0.5,
     capacity: 8,
-    mode: 'normal'
+    mode: 'normal',
+    numFloors: 4
   },
   personOptions: {
     startTime: 9,
