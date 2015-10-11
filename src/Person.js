@@ -8,7 +8,7 @@ class Person {
     this._finishTime = options.finishTime;
     this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
-    this._targetFloor = 1;
+    this._targetFloor = 2;
 
     this._mock = new Chance();
     this._name = this._mock.name();

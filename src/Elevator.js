@@ -74,8 +74,9 @@ class Elevator {
   loadPerson(person) {
     this._people.push(person);
   }
+
   unloadPerson() {
-    var p = _.last(this._people);
+    var p = _.last(this.getPeopleForFloor(this.currentFloor));
     if (typeof p === 'undefined') {
       return false;
     }
