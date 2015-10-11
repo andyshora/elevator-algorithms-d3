@@ -25,6 +25,42 @@ class Building {
   }
 
   workElevators(t) {
+    // for each floor in the building
+    for (let i = 0; i < this._numFloors.length; i++) {
+      let people = this.getPeopleWaitingOnFloor(i);
+
+      // if there's people waiting on this floor
+      if (people.length) {
+        let elevators = this.getElevatorsOnFloor(i);
+        for (let j = 0; j < elevators.length; j++) {
+          // if elevator has room
+          let room = elevators[j].room;
+
+          // unload people from elevator
+          while (elevators[j].unloadPerson()) {
+            var p = elevators[j].unloadPerson();
+            p.updateState(i, 'resting');
+          }
+
+
+          // load people into elevators
+          let k = 0;
+          while (elevators[j].hasRoom()) {
+            elevators[j].loadPerson(people[k]);
+            people[k].updateState(i, 'travelling');
+            k++;
+          }
+
+        }
+      }
+    }
+  }
+
+  getPeopleWaitingOnFloor(n) {
+
+  }
+
+  getElevatorsOnFloor(n) {
 
   }
 

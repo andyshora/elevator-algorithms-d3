@@ -11,7 +11,9 @@ export default {
     numPeople: 20
   },
   elevatorOptions: {
-    maxSpeed: 0.5
+    maxSpeed: 0.5,
+    capacity: 8,
+    mode: 'normal'
   },
   personOptions: {
     startTime: 9,
