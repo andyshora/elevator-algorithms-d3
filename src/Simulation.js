@@ -1,5 +1,7 @@
 import {Building} from './Building';
 import {Viz} from './Viz';
+import {Utils} from './Utils';
+import _ from 'lodash';
 
 class Simulation {
 
@@ -11,6 +13,10 @@ class Simulation {
     if (typeof window !== 'undefined') {
       // this.viz = new Viz();
     }
+  }
+
+  setDebug(val) {
+    Utils.setDebug(val);
   }
 
   start() {

@@ -1,7 +1,9 @@
+import _ from 'lodash';
+
 class Elevator {
 
   constructor(options) {
-    this._state = 'resting';
+    this._state = 'waiting';
     this._currentFloor = 0;
     this._maxSpeed = options.maxSpeed;
     this._mode = options.mode;
@@ -12,7 +14,9 @@ class Elevator {
   loadPassengers() {}
   loadPassenger() {}
   setMode() {}
-  travel() {}
+  updateState(state) {
+    this._state = state;
+  }
   setDirection() {}
   setTarget() {}
   loadPerson(person) {

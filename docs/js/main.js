@@ -37,6 +37,7 @@ const run = async () => {
     });
     console.log('simulation', sim);
 
+    sim.setDebug(true);
     sim.start();
     sim.runFor(10);
 

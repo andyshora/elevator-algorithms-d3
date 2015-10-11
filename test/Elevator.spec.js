@@ -15,8 +15,8 @@ describe('The Elevator', () => {
     expect(typeof elevator).to.be.equal('object');
   });
 
-  it('should be resting initially', function() {
-    expect(elevator.state).to.be.equal('resting');
+  it('should be waiting initially', function() {
+    expect(elevator.state).to.be.equal('waiting');
   });
 
   it('should have a finish time', function() {

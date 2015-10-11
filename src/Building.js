@@ -1,6 +1,7 @@
 import {Elevator} from './Elevator';
 import {Person} from './Person';
 import {Utils} from './Utils';
+import _ from 'lodash';
 
 class Building {
   constructor(options, personOptions, elevatorOptions) {
@@ -35,8 +36,8 @@ class Building {
 
       // if there's people waiting on this floor
       if (people.length) {
-        let elevators = this.getElevatorsOnFloor(i);
-        Utils.log(`getElevatorsOnFloor(${i})`, elevators);
+        let elevators = this.getElevatorsWaitingOnFloor(i);
+        Utils.log(`getElevatorsWaitingOnFloor(${i})`, elevators);
         for (let j = 0; j < elevators.length; j++) {
           // if elevator has room
           let room = elevators[j].room;
@@ -51,12 +52,13 @@ class Building {
 
           // load people into elevators
           let k = 0;
-          while (elevators[j].hasRoom()) {
+          while (elevators[j].hasRoom() && (k < people.length)) {
             Utils.log('loading person', people[k]);
             elevators[j].loadPerson(people[k]);
             people[k].updateState(i, 'travelling');
             k++;
           }
+          elevators[j].updateState('starting');
 
         }
       } else {
@@ -69,8 +71,12 @@ class Building {
     return _.filter(this._people, { currentFloor: n, state: 'waiting' });
   }
 
-  getElevatorsOnFloor(n) {
-    return _.filter(this._elevators, { currentFloor: n });
+  getElevatorsWaitingOnFloor(n) {
+    return _.reject(
+      _.filter(this._elevators, { currentFloor: n, state: 'waiting' }),
+      (e) => {
+        return /starting|stopping/g.test(e.state);
+      });
   }
 
   // ------ GETTERS ------
