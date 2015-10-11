@@ -29,13 +29,50 @@ class Building {
   workElevators(t) {
     Utils.log(`----------- begin tick ${t} -------------`);
 
-    // elevators should travel
+    // elevators should travel on tick first
     for (let i = 0; i < this._elevators.length; i++) {
       this._elevators[i].travelOneTick();
     }
 
+    // for each elevator
+    // check if loading/unloading needs to be done
+    for (let i = 0; i < this._elevators.length; i++) {
+      let floor = this._elevators[i].currentFloor;
+
+      // unload people from elevator if needed
+      let p;
+      let peopleForFloor = this._elevators[i].getPeopleForFloor(floor);
+
+      if (peopleForFloor) {
+        Utils.log(`Unloading elevator ${i} at floor ${floor}`, peopleForFloor);
+
+        while (p = this._elevators[i].unloadPerson()) {
+          Utils.log(`   ${p.name} (id:${p.id}) got off`);
+          p.updateState(floor, 'resting');
+        }
+      }
+
+      // do loading
+      let peopleWaiting = this.getPeopleWaitingOnFloor(floor);
+
+      if (peopleWaiting) {
+        Utils.log(`There are ${peopleWaiting.length} people waiting on floor ${floor}`, peopleWaiting);
+        let k = 0;
+        while (this._elevators[i].hasRoom() && (k < peopleWaiting.length)) {
+          Utils.log(`   ${peopleWaiting[k].name} (id:${peopleWaiting[k].id})`);
+          this._elevators[i].loadPerson(peopleWaiting[k]);
+          peopleWaiting[k].updateState(floor, 'travelling');
+          k++;
+        }
+      }
+
+      this._elevators[i].updateState('starting');
+
+
+    }
+
     // for each floor in the building
-    for (let i = 0; i < this._numFloors; i++) {
+    /*for (let i = 0; i < this._numFloors; i++) {
       let people = this.getPeopleWaitingOnFloor(i);
       Utils.log(`There are ${people.length} people waiting on floor ${i}`, people);
 
@@ -44,8 +81,7 @@ class Building {
         let elevators = this.getElevatorsWaitingOnFloor(i);
         Utils.log(`There are ${elevators.length} elevators waiting on floor ${i}`, elevators);
         for (let j = 0; j < elevators.length; j++) {
-          // if elevator has room
-          let room = elevators[j].room;
+
 
           // unload people from elevator
           let p;
@@ -75,7 +111,7 @@ class Building {
       } else {
         // Utils.log(`Nobody waiting on floor ${i}`);
       }
-    }
+    }*/
 
     for (let i = 0; i < this._elevators.length; i++) {
       this._elevators[i].setTargetFloors(this._numFloors);
