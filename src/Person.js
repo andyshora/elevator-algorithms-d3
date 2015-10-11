@@ -3,14 +3,15 @@ class Person {
 
     this._startTime = options.startTime;
     this._finishTime = options.finishTime;
-    this._state = 'resting';
+    this._name = options.name;
+    this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
   }
 
   setTarget() {}
   updateState(floorNum, state) {
     this._currentFloor = floorNum;
-    thus._state = state;
+    this._state = state;
   }
 
   // ------ GETTERS ------
@@ -25,6 +26,9 @@ class Person {
   }
   get currentFloor() {
     return this._currentFloor;
+  }
+  get name() {
+    return this._name;
   }
 
 }

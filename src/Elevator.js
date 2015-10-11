@@ -16,12 +16,16 @@ class Elevator {
   setDirection() {}
   setTarget() {}
   loadPerson(person) {
-
-    // todo - update person state
+    this._people.push(person);
   }
   unloadPerson() {
-    var personUnloaded = false;
-    return personUnloaded;
+    var p = _.last(this._people);
+    if (typeof p === 'undefined') {
+      return false;
+    }
+    this._people.pop();
+
+    return p;
   }
 
   getPeopleTravellingToCurrentFloor() {

@@ -1,5 +1,6 @@
 import {Elevator} from './Elevator';
 import {Person} from './Person';
+import {Utils} from './Utils';
 
 class Building {
   constructor(options, personOptions, elevatorOptions) {
@@ -25,20 +26,25 @@ class Building {
   }
 
   workElevators(t) {
+    Utils.log('workElevators', t);
+
     // for each floor in the building
-    for (let i = 0; i < this._numFloors.length; i++) {
+    for (let i = 0; i < this._numFloors; i++) {
       let people = this.getPeopleWaitingOnFloor(i);
+      Utils.log(`getPeopleWaitingOnFloor(${i})`, people);
 
       // if there's people waiting on this floor
       if (people.length) {
         let elevators = this.getElevatorsOnFloor(i);
+        Utils.log(`getElevatorsOnFloor(${i})`, elevators);
         for (let j = 0; j < elevators.length; j++) {
           // if elevator has room
           let room = elevators[j].room;
 
           // unload people from elevator
-          while (elevators[j].unloadPerson()) {
-            var p = elevators[j].unloadPerson();
+          let p;
+          while (p = elevators[j].unloadPerson()) {
+            Utils.log('unloading person', p);
             p.updateState(i, 'resting');
           }
 
@@ -46,22 +52,25 @@ class Building {
           // load people into elevators
           let k = 0;
           while (elevators[j].hasRoom()) {
+            Utils.log('loading person', people[k]);
             elevators[j].loadPerson(people[k]);
             people[k].updateState(i, 'travelling');
             k++;
           }
 
         }
+      } else {
+        Utils.log('nobody waiting on floor', i);
       }
     }
   }
 
   getPeopleWaitingOnFloor(n) {
-
+    return _.filter(this._people, { currentFloor: n, state: 'waiting' });
   }
 
   getElevatorsOnFloor(n) {
-
+    return _.filter(this._elevators, { currentFloor: n });
   }
 
   // ------ GETTERS ------

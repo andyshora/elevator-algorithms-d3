@@ -9,12 +9,15 @@ class Simulation {
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
     if (typeof window !== 'undefined') {
-      this.viz = new Viz();
+      // this.viz = new Viz();
     }
   }
 
   start() {
-    this.viz.animate();
+    if (this.viz) {
+      this.viz.animate();
+
+    }
     // this.viz.addTestParticles();
   }
 
