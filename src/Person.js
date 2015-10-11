@@ -1,13 +1,18 @@
 import _ from 'lodash';
+import {Chance} from 'chance';
 
 class Person {
-  constructor(options) {
+  constructor(options, n) {
 
     this._startTime = options.startTime;
     this._finishTime = options.finishTime;
-    this._name = options.name;
     this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
+    this._targetFloor = 1;
+
+    this._mock = new Chance();
+    this._name = this._mock.name();
+    this._id = n;
   }
 
   setTarget() {}
@@ -28,6 +33,9 @@ class Person {
   }
   get currentFloor() {
     return this._currentFloor;
+  }
+  get targetFloor() {
+    return this._targetFloor;
   }
   get name() {
     return this._name;

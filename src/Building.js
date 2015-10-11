@@ -22,7 +22,7 @@ class Building {
     }
 
     for (var i = 0; i < this._numPeople; i++) {
-      this._people.push(new Person(personOptions));
+      this._people.push(new Person(personOptions, i));
     }
   }
 
@@ -58,6 +58,9 @@ class Building {
             people[k].updateState(i, 'travelling');
             k++;
           }
+          if (!k) {
+            Utils.log('No elevators available on floor ', i);
+          }
           elevators[j].updateState('starting');
 
         }
@@ -65,6 +68,12 @@ class Building {
         Utils.log('nobody waiting on floor', i);
       }
     }
+
+    for (let i = 0; i < this._elevators.length; i++) {
+      this._elevators[i].setTargetFloors(this._numFloors);
+    }
+
+    Utils.log('----------- tick over -------------');
   }
 
   getPeopleWaitingOnFloor(n) {

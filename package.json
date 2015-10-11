@@ -45,7 +45,8 @@
     "postcss-import": "^7.0.0",
     "postcss-nested": "^1.0.0",
     "sinon": "^1.16.1",
-    "mocha-clean": "~0.4.0"
+    "mocha-clean": "~0.4.0",
+    "chance": "~0.8.0"
   },
   "scripts": {
     "styles": "sass styles/main.scss docs/css/main.css",

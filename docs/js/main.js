@@ -32,14 +32,15 @@ const run = async () => {
       },
       personOptions: {
         startTime: 9,
-        finishTime: 18
+        finishTime: 18,
+        nameGenerator: (n) => { return 'Worker-' + n; }
       }
     });
     console.log('simulation', sim);
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(10);
+    sim.runFor(5);
 
   } catch (err) {
     console.log(err);

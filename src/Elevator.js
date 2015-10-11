@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {Utils} from './Utils';
 
 class Elevator {
 
@@ -9,16 +10,48 @@ class Elevator {
     this._mode = options.mode;
     this._capacity = options.capacity;
     this._people = [];
+    this._direction = 0;
+    this._targetFloors = [];
   }
 
   loadPassengers() {}
   loadPassenger() {}
   setMode() {}
   updateState(state) {
+    Utils.log('Updating state to', state, this._people.length + ' people');
     this._state = state;
   }
-  setDirection() {}
-  setTarget() {}
+  setDirection() {
+
+  }
+  setTargetFloors(numFloors) {
+    if (this._currentFloor === 0) {
+      this._direction = 1;
+    }
+
+    // for all the people in the elevator
+    // traverse up floors and if someone wants to stop there, add it
+    // then traverse down the floors (from the current floor) and add it
+    let targetFloorsAbove = [];
+    let targetFloorsBelow = [];
+
+    // floors above
+    for (let i = this._currentFloor; i <= numFloors; i++) {
+      if (_.find(this._people, { targetFloor: i })) {
+        targetFloorsAbove.push(i);
+      }
+    }
+
+    // floors below
+    for (let i = this._currentFloor; i >= numFloors; i--) {
+      if (_.find(this._people, { targetFloor: i })) {
+        targetFloorsBelow.push(i);
+      }
+    }
+
+    this._targetFloors = targetFloorsAbove.concat(targetFloorsBelow);
+    Utils.log('targetFloors', this._targetFloors);
+  }
   loadPerson(person) {
     this._people.push(person);
   }
@@ -57,8 +90,14 @@ class Elevator {
   get currentFloor() {
     return this._currentFloor;
   }
+  get targetFloors() {
+    return this._targetFloors;
+  }
   get people() {
     return this._people;
+  }
+  get direction() {
+    return this._direction;
   }
 }
 
