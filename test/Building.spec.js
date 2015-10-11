@@ -8,7 +8,7 @@ describe('The Building', () => {
   let building = null;
 
   beforeEach(() => {
-    building = new Building(options.buildingOptions);
+    building = new Building(options.buildingOptions, options.personOptions, options.elevatorOptions);
   });
 
   it('should be an object', function() {

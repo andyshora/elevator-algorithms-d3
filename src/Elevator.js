@@ -4,9 +4,7 @@ class Elevator {
     this._state = 'resting';
     this._currentFloor = 0;
 
-    for (var key in options) {
-      this[key] = options[key];
-    }
+    this._maxSpeed = options.maxSpeed;
   }
 
   loadPassengers() {}
@@ -19,6 +17,9 @@ class Elevator {
   // ------ GETTERS ------
   get state() {
     return this._state;
+  }
+  get maxSpeed() {
+    return this._maxSpeed;
   }
   get currentFloor() {
     return this._currentFloor;

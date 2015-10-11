@@ -420,13 +420,16 @@ html, body {
     overflow: hidden; }
 
 .description {
-  padding: 100px;
   display: inline-block;
-  width: 30%; }
+  width: 25%;
+  vertical-align: top;
+  padding: 20px 0 0 20px; }
 
 .simulation {
   width: 65%;
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px 0 20px 20px; }
 
 .content {
   vertical-align: top;

@@ -32,7 +32,7 @@ const src = async () => {
 const assets = async () => {
   const files = await fs.getFiles('docs');
   for (const file of files) {
-    if (file.endsWith('.svg') || file.endsWith('.ico')) {
+    if (file.endsWith('.svg') || file.endsWith('.png') || file.endsWith('.ico')) {
       await fs.copyFile('docs/' + file, 'build/' + file);
     }
   }

@@ -8,7 +8,9 @@ class Simulation {
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
-    this.viz = new Viz();
+    if (typeof window !== 'undefined') {
+      this.viz = new Viz();
+    }
   }
 
   start() {

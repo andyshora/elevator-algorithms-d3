@@ -8,9 +8,7 @@ describe('The Simulation', () => {
   let sim = null;
 
   beforeEach(() => {
-
     sim = new Simulation(options);
-
   });
 
   it('should be an object', function() {
