@@ -423,7 +423,8 @@ html, body {
   display: inline-block;
   width: 25%;
   vertical-align: top;
-  padding: 20px 0 0 20px; }
+  padding: 20px 0 0 20px;
+  display: none; }
 
 .simulation {
   width: 65%;
@@ -776,3 +777,5 @@ h1, h2, h3, h4, h5, p {
   Component Styles
 -----------------------------------------------------------------------*
  */
+
+/*# sourceMappingURL=main.css.map */

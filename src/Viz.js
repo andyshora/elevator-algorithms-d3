@@ -20,7 +20,7 @@ class Viz {
     this.WIDTH = window.innerWidth * .68;;
     this.HEIGHT = window.innerHeight;
 
-    this.WORLD_SIZE = 100;
+    this.WORLD_SIZE = 10000;
 
     // set some camera attributes
     this.VIEW_ANGLE = 60;
@@ -191,14 +191,110 @@ class Viz {
     this.pointCloud.sortParticles = true;
     this.pointCloud.dynamic = true;
 
+    this.drawGrid();
+    this.drawCube();
 
     this.scene.add(this.camera);
-    this.scene.add(this.pointCloud);
+    // this.scene.add(this.pointCloud);
 
     // window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
     // window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
     // window.addEventListener( 'mousedown', onDocumentMouseDown, false );
+  }
+
+  drawCube() {
+    var r = this.WORLD_SIZE / 2;
+    var numFloors = 5;
+    var floorHeight = this.WORLD_SIZE / numFloors;
+
+    var geometry = new THREE.BoxGeometry(floorHeight / 4, floorHeight / 4, floorHeight / 4);
+    var material = new THREE.MeshNormalMaterial({ color: 0xff0000 });
+    var cube = new THREE.Mesh(geometry, material);
+
+    cube.position.set(0, -r + (floorHeight / 8), r);
+    this.scene.add(cube);
+
+    // draw line down to cube
+    var material = new THREE.LineBasicMaterial({
+      color: 0xcccccc
+    });
+
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(0, -r, r));
+    geometry.vertices.push(new THREE.Vector3(0, r, r));
+    var line = new THREE.Line(geometry, material);
+    this.scene.add(line);
+
+
+  }
+
+  drawGrid() {
+    var r = this.WORLD_SIZE / 2;
+
+
+    var material = new THREE.LineBasicMaterial({
+      color: 0x666666
+    });
+
+    var startVal = -r;
+
+    var numDivisions = 20;
+    var divisionLength = this.WORLD_SIZE / numDivisions;
+
+    var numFloors = 5;
+    var floorHeight = this.WORLD_SIZE / numFloors;
+
+    for (var i = 0; i <= numDivisions; i++) {
+
+      for (var j = 0; j < numFloors; j++) {
+
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), -r + (j * floorHeight), -r));
+        geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), -r + (j * floorHeight), r));
+        var line = new THREE.Line(geometry, material);
+        this.scene.add(line);
+
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3(-r, -r + (j * floorHeight), startVal + (divisionLength * i)));
+        geometry.vertices.push(new THREE.Vector3(r, -r + (j * floorHeight), startVal + (divisionLength * i)));
+        var line = new THREE.Line(geometry, material);
+        this.scene.add(line);
+
+      }
+
+
+
+      /*var geometry = new THREE.Geometry();
+      geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, -r));
+      geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
+      var line = new THREE.Line(geometry, material);
+      this.scene.add(line);
+
+      var geometry = new THREE.Geometry();
+      geometry.vertices.push(new THREE.Vector3(-r, startVal + (divisionLength * i), -r));
+      geometry.vertices.push(new THREE.Vector3(-r, startVal + (divisionLength * i), r));
+      var line = new THREE.Line(geometry, material);
+      this.scene.add(line);
+
+      var geometry = new THREE.Geometry();
+      geometry.vertices.push(new THREE.Vector3(r, startVal + (divisionLength * i), -r));
+      geometry.vertices.push(new THREE.Vector3(r, startVal + (divisionLength * i), r));
+      var line = new THREE.Line(geometry, material);
+      this.scene.add(line);*/
+
+      // var geometry = new THREE.Geometry();
+      // geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
+      // geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
+      // var line = new THREE.Line(geometry, material);
+      // this.scene.add(line);
+    }
+    // geometry.vertices.push(new THREE.Vector3(this.WORLD_SIZE, 0, 0));
+
+
+
+
+
   }
 
   setAttributeNeedsUpdateFlags() {

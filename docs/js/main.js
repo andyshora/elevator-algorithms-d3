@@ -4,7 +4,7 @@
  */
 
 import 'babel/polyfill';
-import {Simulation} from '../../lib/Simulation';
+import {Simulation} from './lib/Simulation';
 
 let app = null;
 

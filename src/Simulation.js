@@ -11,7 +11,7 @@ class Simulation {
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
     if (typeof window !== 'undefined') {
-      // this.viz = new Viz();
+      this.viz = new Viz();
     }
   }
 

@@ -10,7 +10,7 @@ import { rootDir } from './config';
 
 // Clean output directories
 const cleanup = async () => {
-  await del(['build/*', 'lib/*', '!build/.git'], { dot: true });
+  await del(['build/*', 'docs/js/lib/*', '!build/.git'], { dot: true });
   await fs.makeDir('build');
   await fs.makeDir('lib');
 };
@@ -23,8 +23,8 @@ const src = async () => {
   for (const file of files) {
     const source = await fs.readFile('src/' + file);
     const result = babel.transform(source);
-    await fs.writeFile('lib/' + file, result.code);
-    await fs.writeFile('lib/' + file.substr(0, file.length - 3) + '.babel.js', source);
+    await fs.writeFile('docs/js/lib/' + file, result.code);
+    await fs.writeFile('docs/js/lib/' + file.substr(0, file.length - 3) + '.babel.js', source);
   }
 };
 
