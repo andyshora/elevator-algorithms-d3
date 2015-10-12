@@ -18,6 +18,7 @@ export default {
   },
   personOptions: {
     startTime: 9,
-    finishTime: 18
+    finishTime: 18,
+    generateTargetFloor: (n) => { return Math.round(Math.random() * 1) + 1 }
   }
 };

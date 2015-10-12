@@ -34,7 +34,7 @@ const run = async () => {
       personOptions: {
         startTime: 9,
         finishTime: 18,
-        nameGenerator: (n) => { return 'Worker-' + n; }
+        generateTargetFloor: (n) => { return Math.round(Math.random() * 1) + 1 }
       }
     });
     console.log('simulation', sim);

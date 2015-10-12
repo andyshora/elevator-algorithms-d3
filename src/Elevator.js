@@ -23,20 +23,23 @@ class Elevator {
   loadPassenger() {}
   setMode() {}
   updateState(state) {
-    Utils.log('Updating state to', state, this._people.length + ' people');
+    Utils.log('Updating state to', state, this._people.length + ' people', this._people);
     this._state = state;
   }
   travelOneTick() {
 
-    if (this._currentFloor === 0 && this._people.length) {
+    if (!this.targetFloors.length) {
+      // no people? go down
+      this._direction = -1;
+    } else if (this._currentFloor === 0 && this._people.length) {
       // at the bottom and people loaded
+
       this._direction = 1;
     } else if (this._currentFloor === this._numFloors) {
       // at the top
       this._direction = -1;
     } else if (this._currentFloor > 0 && !this._people.length) {
-      // no people? go down
-      this._direction = -1;
+
     }
     this._currentFloor += this._direction; // todo: use this._maxSpeed
 
@@ -77,7 +80,9 @@ class Elevator {
 
   unloadPerson() {
     var p = _.last(this.getPeopleForFloor(this.currentFloor));
+    Utils.log('Unloading person', p);
     if (typeof p === 'undefined') {
+      Utils.log('returning');
       return false;
     }
     this._people.pop();
