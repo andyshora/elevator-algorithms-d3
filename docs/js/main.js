@@ -15,6 +15,10 @@ const run = async () => {
     // app = angular.module('SimulationApp', ['ngResource']);
 
     sim = new Simulation({
+      vizOptions: {
+        worldSize: 10000,
+        numFloors: 4
+      },
       simulationOptions: {
         tickTime: 1000
       },

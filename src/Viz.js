@@ -1,7 +1,7 @@
 import {Detector} from './Detector';
 
 class Viz {
-  constructor(args) {
+  constructor(options) {
     this.applyPolyfills();
 
     let detector = new Detector();
@@ -13,6 +13,10 @@ class Viz {
     }
 
 
+    this.WORLD_SIZE = options.worldSize;
+    this.numFloors = options.numFloors;
+    this.floorHeight = this.WORLD_SIZE / this.numFloors;
+
 
     this.NUM_PARTICLES = 1000;
     this.NUM_RESERVE_PARTICLES = 1000;
@@ -22,13 +26,10 @@ class Viz {
     this.WIDTH = window.innerWidth * .68;;
     this.HEIGHT = window.innerHeight;
 
-    this.WORLD_SIZE = 10000;
-
+    // this.WORLD_SIZE = 10000;
 
     // simulation vars - todo, pass in
     this.cube = null;
-    this.numFloors = 5;
-    this.floorHeight = this.WORLD_SIZE / this.numFloors;
     this.elevatorLabel = null;
 
     // set some camera attributes
@@ -293,12 +294,11 @@ class Viz {
     var numDivisions = 20;
     var divisionLength = this.WORLD_SIZE / numDivisions;
 
-    var numFloors = 5;
-    var floorHeight = this.WORLD_SIZE / numFloors;
+    var floorHeight = this.WORLD_SIZE / this.numFloors;
 
     for (var i = 0; i <= numDivisions; i++) {
 
-      for (var j = 0; j < numFloors; j++) {
+      for (var j = 0; j < this.numFloors; j++) {
 
         var geometry = new THREE.Geometry();
         geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), -r + (j * floorHeight), -r));

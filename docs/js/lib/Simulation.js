@@ -29,7 +29,7 @@ var Simulation = (function () {
     this.building = new _Building.Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
     if (typeof window !== 'undefined') {
-      this.viz = new _Viz.Viz();
+      this.viz = new _Viz.Viz(args.vizOptions);
     }
   }
 

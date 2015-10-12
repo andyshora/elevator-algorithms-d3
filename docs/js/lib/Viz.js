@@ -11,7 +11,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var _Detector = require('./Detector');
 
 var Viz = (function () {
-  function Viz(args) {
+  function Viz(options) {
     _classCallCheck(this, Viz);
 
     this.applyPolyfills();
@@ -24,6 +24,10 @@ var Viz = (function () {
       return;
     }
 
+    this.WORLD_SIZE = options.worldSize;
+    this.numFloors = options.numFloors;
+    this.floorHeight = this.WORLD_SIZE / this.numFloors;
+
     this.NUM_PARTICLES = 1000;
     this.NUM_RESERVE_PARTICLES = 1000;
     this.PARTICLE_SIZE = 1;
@@ -32,12 +36,10 @@ var Viz = (function () {
     this.WIDTH = window.innerWidth * .68;;
     this.HEIGHT = window.innerHeight;
 
-    this.WORLD_SIZE = 10000;
+    // this.WORLD_SIZE = 10000;
 
     // simulation vars - todo, pass in
     this.cube = null;
-    this.numFloors = 5;
-    this.floorHeight = this.WORLD_SIZE / this.numFloors;
     this.elevatorLabel = null;
 
     // set some camera attributes
@@ -294,12 +296,11 @@ var Viz = (function () {
       var numDivisions = 20;
       var divisionLength = this.WORLD_SIZE / numDivisions;
 
-      var numFloors = 5;
-      var floorHeight = this.WORLD_SIZE / numFloors;
+      var floorHeight = this.WORLD_SIZE / this.numFloors;
 
       for (var i = 0; i <= numDivisions; i++) {
 
-        for (var j = 0; j < numFloors; j++) {
+        for (var j = 0; j < this.numFloors; j++) {
 
           var geometry = new THREE.Geometry();
           geometry.vertices.push(new THREE.Vector3(startVal + divisionLength * i, -r + j * floorHeight, -r));
