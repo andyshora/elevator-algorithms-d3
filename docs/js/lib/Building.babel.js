@@ -26,6 +26,15 @@ class Building {
     }
   }
 
+  getFloorData() {
+
+    var arr = [];
+    for (var i = 0; i < this.numFloors; i++) {
+      arr.push(_.filter(this._people, { currentFloor: i }));
+    }
+    return arr;
+  }
+
   workElevators(t) {
     Utils.log(`----------- begin tick ${t} -------------`);
 

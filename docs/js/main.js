@@ -20,7 +20,7 @@ const run = async () => {
         numFloors: 4
       },
       simulationOptions: {
-        tickTime: 1000
+        tickTime: 2000
       },
       buildingOptions: {
         name: 'QB',
@@ -28,7 +28,8 @@ const run = async () => {
         openingTime: 9,
         closingTime: 18,
         numElevators: 1,
-        numPeople: 100
+        numPeople: 100,
+        onTick: (data) => { sim.onTick(data) }
       },
       elevatorOptions: {
         maxSpeed: 0.5,
@@ -47,7 +48,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(20);
+    sim.runFor(10);
 
     /*var maxInt = 1000;
     var i = 0;

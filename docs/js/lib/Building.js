@@ -45,6 +45,16 @@ var Building = (function () {
   }
 
   _createClass(Building, [{
+    key: 'getFloorData',
+    value: function getFloorData() {
+
+      var arr = [];
+      for (var i = 0; i < this.numFloors; i++) {
+        arr.push(_lodash2['default'].filter(this._people, { currentFloor: i }));
+      }
+      return arr;
+    }
+  }, {
     key: 'workElevators',
     value: function workElevators(t) {
       _Utils.Utils.log('----------- begin tick ' + t + ' -------------');

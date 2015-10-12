@@ -16,6 +16,7 @@ class Viz {
     this.WORLD_SIZE = options.worldSize;
     this.numFloors = options.numFloors;
     this.floorHeight = this.WORLD_SIZE / this.numFloors;
+    this.floorText = [];
 
 
     this.NUM_PARTICLES = 1000;
@@ -226,7 +227,6 @@ class Viz {
     this.elevatorLabel.position.set(0, -r + (data.floor * this.floorHeight), r + (this.floorHeight / 8) + 50);
 
     // todo - update label text
-    console.log('this.elevatorLabel', this.elevatorLabel.geometry);
     this.elevatorLabel.geometry = new THREE.TextGeometry('passengers: ' + data.numPeople, {
       size: 300,
       height: 10,
@@ -278,7 +278,34 @@ class Viz {
     this.elevatorLabel.position.set(0, -r, r + (this.floorHeight / 8) + 50);
     this.scene.add(this.elevatorLabel);
 
+  }
 
+  updateFloorLabel(i, labelText) {
+    console.log('updateFloorLabel', i, labelText);
+    var textMaterial = new THREE.LineBasicMaterial({
+      color: 0xffffff
+    });
+
+    // floor labels
+    var geometry = new THREE.TextGeometry(labelText, {
+      size: 300,
+      height: 10,
+      curveSegments: 0,
+      font: 'helvetiker',
+      bevelThickness: 1,
+      bevelSize: 2,
+      bevelEnabled: true,
+      material: 0,
+      extrudeMaterial: 1
+    });
+    this.floorText[i].geometry = geometry;
+  }
+
+  onTick(data) {
+    console.log('onTick', data);
+    for (var i = 0; i < data.floors.length; i++) {
+      this.updateFloorLabel(i, data.floors[i].length);
+    }
   }
 
   drawGrid() {
@@ -296,9 +323,31 @@ class Viz {
 
     var floorHeight = this.WORLD_SIZE / this.numFloors;
 
-    for (var i = 0; i <= numDivisions; i++) {
+    for (var j = 0; j < this.numFloors; j++) {
 
-      for (var j = 0; j < this.numFloors; j++) {
+
+      var textMaterial = new THREE.LineBasicMaterial({
+        color: 0xffffff
+      });
+
+      // floor labels
+      var geometry = new THREE.TextGeometry('People: 0', {
+        size: 300,
+        height: 10,
+        curveSegments: 0,
+        font: 'helvetiker',
+        bevelThickness: 1,
+        bevelSize: 2,
+        bevelEnabled: true,
+        material: 0,
+        extrudeMaterial: 1
+      });
+      var label = new THREE.Mesh(geometry, textMaterial);
+      label.position.set(0, -r + (j * floorHeight), 0);
+      this.scene.add(label);
+      this.floorText.push(label);
+
+      for (var i = 0; i <= numDivisions; i++) {
 
         var geometry = new THREE.Geometry();
         geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), -r + (j * floorHeight), -r));
@@ -314,36 +363,7 @@ class Viz {
 
       }
 
-
-
-      /*var geometry = new THREE.Geometry();
-      geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, -r));
-      geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
-      var line = new THREE.Line(geometry, material);
-      this.scene.add(line);
-
-      var geometry = new THREE.Geometry();
-      geometry.vertices.push(new THREE.Vector3(-r, startVal + (divisionLength * i), -r));
-      geometry.vertices.push(new THREE.Vector3(-r, startVal + (divisionLength * i), r));
-      var line = new THREE.Line(geometry, material);
-      this.scene.add(line);
-
-      var geometry = new THREE.Geometry();
-      geometry.vertices.push(new THREE.Vector3(r, startVal + (divisionLength * i), -r));
-      geometry.vertices.push(new THREE.Vector3(r, startVal + (divisionLength * i), r));
-      var line = new THREE.Line(geometry, material);
-      this.scene.add(line);*/
-
-      // var geometry = new THREE.Geometry();
-      // geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
-      // geometry.vertices.push(new THREE.Vector3(startVal + (divisionLength * i), r, r));
-      // var line = new THREE.Line(geometry, material);
-      // this.scene.add(line);
     }
-    // geometry.vertices.push(new THREE.Vector3(this.WORLD_SIZE, 0, 0));
-
-
-
 
 
   }
