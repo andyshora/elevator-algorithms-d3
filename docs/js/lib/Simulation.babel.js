@@ -27,6 +27,15 @@ class Simulation {
     // this.viz.addTestParticles();
   }
 
+  // update viz
+  onElevatorStateChanged(data) {
+    this.viz.onElevatorStateChanged(data);
+  }
+
+  updatePosition(i) {
+    this.viz.updateCubePosition(i);
+  }
+
   runFor(i) {
     let j = 0;
     let interval = setInterval(() => {

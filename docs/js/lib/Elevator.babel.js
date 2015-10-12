@@ -17,6 +17,7 @@ class Elevator {
     this._mock = new Chance();
     this._name = this._mock.first();
     this._numFloors = options.numFloors;
+    this.onStateChange = options.onStateChange;
   }
 
   loadPassengers() {}
@@ -25,6 +26,11 @@ class Elevator {
   updateState(state) {
     Utils.log('Updating state to', state, this._people.length + ' people', this._people);
     this._state = state;
+    this.onStateChange({
+      id: this.id,
+      state: this.state,
+      floor: this.currentFloor
+    });
   }
   travelOneTick() {
 

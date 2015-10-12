@@ -46,6 +46,18 @@ var Simulation = (function () {
       }
       // this.viz.addTestParticles();
     }
+
+    // update viz
+  }, {
+    key: 'onElevatorStateChanged',
+    value: function onElevatorStateChanged(data) {
+      this.viz.onElevatorStateChanged(data);
+    }
+  }, {
+    key: 'updatePosition',
+    value: function updatePosition(i) {
+      this.viz.updateCubePosition(i);
+    }
   }, {
     key: 'runFor',
     value: function runFor(i) {

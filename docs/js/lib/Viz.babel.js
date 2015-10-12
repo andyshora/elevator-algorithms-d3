@@ -12,6 +12,8 @@ class Viz {
       return;
     }
 
+
+
     this.NUM_PARTICLES = 1000;
     this.NUM_RESERVE_PARTICLES = 1000;
     this.PARTICLE_SIZE = 1;
@@ -21,6 +23,12 @@ class Viz {
     this.HEIGHT = window.innerHeight;
 
     this.WORLD_SIZE = 10000;
+
+
+    // simulation vars - todo, pass in
+    this.cube = null;
+    this.numFloors = 5;
+    this.floorHeight = this.WORLD_SIZE / this.numFloors;
 
     // set some camera attributes
     this.VIEW_ANGLE = 60;
@@ -203,17 +211,28 @@ class Viz {
     // window.addEventListener( 'mousedown', onDocumentMouseDown, false );
   }
 
+  updateCubePosition(i) {
+    var r = this.WORLD_SIZE / 2;
+    this.cube.position.set(0, -r + (i *10) + (this.floorHeight / 8), r);
+  }
+
+  onElevatorStateChanged(data) {
+    console.log('viz, onElevatorStateChanged', data);
+
+    var r = this.WORLD_SIZE / 2;
+    this.cube.position.set(0, -r + (data.floor * this.floorHeight) + (this.floorHeight / 8), r);
+  }
+
   drawCube() {
     var r = this.WORLD_SIZE / 2;
-    var numFloors = 5;
-    var floorHeight = this.WORLD_SIZE / numFloors;
 
-    var geometry = new THREE.BoxGeometry(floorHeight / 4, floorHeight / 4, floorHeight / 4);
+
+    var geometry = new THREE.BoxGeometry(this.floorHeight / 4, this.floorHeight / 4, this.floorHeight / 4);
     var material = new THREE.MeshNormalMaterial({ color: 0xff0000 });
-    var cube = new THREE.Mesh(geometry, material);
+    this.cube = new THREE.Mesh(geometry, material);
 
-    cube.position.set(0, -r + (floorHeight / 8), r);
-    this.scene.add(cube);
+    this.cube.position.set(0, -r + (this.floorHeight / 8), r);
+    this.scene.add(this.cube);
 
     // draw line down to cube
     var material = new THREE.LineBasicMaterial({

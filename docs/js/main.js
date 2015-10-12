@@ -7,13 +7,14 @@ import 'babel/polyfill';
 import {Simulation} from './lib/Simulation';
 
 let app = null;
+let sim = null;
 
 const run = async () => {
   try {
 
     // app = angular.module('SimulationApp', ['ngResource']);
 
-    let sim = new Simulation({
+    sim = new Simulation({
       simulationOptions: {
         tickTime: 1000
       },
@@ -29,7 +30,8 @@ const run = async () => {
         maxSpeed: 0.5,
         mode: 'normal',
         capacity: 8,
-        numFloors: 4
+        numFloors: 4,
+        onStateChange: (data) => { sim.onElevatorStateChanged(data) }
       },
       personOptions: {
         startTime: 9,
@@ -42,6 +44,19 @@ const run = async () => {
     sim.setDebug(true);
     sim.start();
     sim.runFor(5);
+
+    /*var maxInt = 1000;
+    var i = 0;
+    var int = setInterval(() => {
+      sim.updatePosition(i);
+
+      i++;
+
+      if (i > maxInt) {
+        clearInterval(int);
+      }
+    }, 16);*/
+
 
   } catch (err) {
     console.log(err);

@@ -34,6 +34,7 @@ var Elevator = (function () {
     this._mock = new _chance.Chance();
     this._name = this._mock.first();
     this._numFloors = options.numFloors;
+    this.onStateChange = options.onStateChange;
   }
 
   _createClass(Elevator, [{
@@ -50,6 +51,11 @@ var Elevator = (function () {
     value: function updateState(state) {
       _Utils.Utils.log('Updating state to', state, this._people.length + ' people', this._people);
       this._state = state;
+      this.onStateChange({
+        id: this.id,
+        state: this.state,
+        floor: this.currentFloor
+      });
     }
   }, {
     key: 'travelOneTick',
