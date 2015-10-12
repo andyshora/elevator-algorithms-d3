@@ -29,7 +29,8 @@ class Elevator {
     this.onStateChange({
       id: this.id,
       state: this.state,
-      floor: this.currentFloor
+      floor: this.currentFloor,
+      numPeople: this.people.length
     });
   }
   travelOneTick() {

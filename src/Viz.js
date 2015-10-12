@@ -29,6 +29,7 @@ class Viz {
     this.cube = null;
     this.numFloors = 5;
     this.floorHeight = this.WORLD_SIZE / this.numFloors;
+    this.elevatorLabel = null;
 
     // set some camera attributes
     this.VIEW_ANGLE = 60;
@@ -200,7 +201,7 @@ class Viz {
     this.pointCloud.dynamic = true;
 
     this.drawGrid();
-    this.drawCube();
+    this.drawElevator();
 
     this.scene.add(this.camera);
     // this.scene.add(this.pointCloud);
@@ -221,9 +222,24 @@ class Viz {
 
     var r = this.WORLD_SIZE / 2;
     this.cube.position.set(0, -r + (data.floor * this.floorHeight) + (this.floorHeight / 8), r);
+    this.elevatorLabel.position.set(0, -r + (data.floor * this.floorHeight), r + (this.floorHeight / 8) + 50);
+
+    // todo - update label text
+    console.log('this.elevatorLabel', this.elevatorLabel.geometry);
+    this.elevatorLabel.geometry = new THREE.TextGeometry('passengers: ' + data.numPeople, {
+      size: 300,
+      height: 10,
+      curveSegments: 0,
+      font: 'helvetiker',
+      bevelThickness: 1,
+      bevelSize: 2,
+      bevelEnabled: true,
+      material: 0,
+      extrudeMaterial: 1
+    });
   }
 
-  drawCube() {
+  drawElevator() {
     var r = this.WORLD_SIZE / 2;
 
 
@@ -244,6 +260,22 @@ class Viz {
     geometry.vertices.push(new THREE.Vector3(0, r, r));
     var line = new THREE.Line(geometry, material);
     this.scene.add(line);
+
+    // label
+    var geometry = new THREE.TextGeometry('passengers: 0', {
+      size: 300,
+      height: 10,
+      curveSegments: 0,
+      font: 'helvetiker',
+      bevelThickness: 1,
+      bevelSize: 2,
+      bevelEnabled: true,
+      material: 0,
+      extrudeMaterial: 1
+    });
+    this.elevatorLabel = new THREE.Mesh(geometry, material);
+    this.elevatorLabel.position.set(0, -r, r + (this.floorHeight / 8) + 50);
+    this.scene.add(this.elevatorLabel);
 
 
   }

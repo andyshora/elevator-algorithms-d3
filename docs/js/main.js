@@ -24,7 +24,7 @@ const run = async () => {
         openingTime: 9,
         closingTime: 18,
         numElevators: 1,
-        numPeople: 20
+        numPeople: 100
       },
       elevatorOptions: {
         maxSpeed: 0.5,
@@ -43,7 +43,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(5);
+    sim.runFor(20);
 
     /*var maxInt = 1000;
     var i = 0;
