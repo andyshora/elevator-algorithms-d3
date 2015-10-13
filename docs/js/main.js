@@ -20,7 +20,7 @@ const run = async () => {
         numFloors: 4
       },
       simulationOptions: {
-        tickTime: 2000
+        tickTime: 1000
       },
       buildingOptions: {
         name: 'QB',
@@ -48,7 +48,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    // sim.runFor(10);
+    // sim.runFor(2);
 
     /*var maxInt = 1000;
     var i = 0;
