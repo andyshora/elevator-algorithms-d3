@@ -48,7 +48,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(10);
+    // sim.runFor(10);
 
     /*var maxInt = 1000;
     var i = 0;
