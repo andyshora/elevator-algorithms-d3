@@ -24,7 +24,7 @@ class Viz {
     this.PARTICLE_SIZE = 1;
 
     // set the scene size
-    this.WIDTH = window.innerWidth * .68;;
+    this.WIDTH = window.innerWidth;
     this.HEIGHT = window.innerHeight;
 
     // this.WORLD_SIZE = 10000;
@@ -234,10 +234,10 @@ class Viz {
 
     var r = this.WORLD_SIZE / 2;
     this.cube.position.set(0, -r + (data.floor * this.floorHeight) + (this.floorHeight / 8), r);
-    this.elevatorLabel.position.set(0, -r + (data.floor * this.floorHeight), r + (this.floorHeight / 8) + 50);
+    this.elevatorLabel.position.set(0, -r + (data.floor * this.floorHeight) + (this.floorHeight / 2), r + (this.floorHeight / 8) + 50);
 
     // todo - update label text
-    this.elevatorLabel.geometry = new THREE.TextGeometry('Passengers: ' + data.numPeople, {
+    this.elevatorLabel.geometry = new THREE.TextGeometry(data.numPeople, {
       size: 300,
       height: 10,
       curveSegments: 0,
@@ -273,7 +273,7 @@ class Viz {
     this.scene.add(line);
 
     // label
-    var geometry = new THREE.TextGeometry('Passengers: 0', {
+    var geometry = new THREE.TextGeometry('', {
       size: 300,
       height: 10,
       curveSegments: 0,
@@ -291,7 +291,6 @@ class Viz {
   }
 
   updateFloorLabel(i, labelText) {
-    console.log('updateFloorLabel', i, labelText);
     var textMaterial = new THREE.LineBasicMaterial({
       color: 0xffffff
     });
@@ -346,7 +345,7 @@ class Viz {
       });
 
       // floor labels
-      var geometry = new THREE.TextGeometry('People: 0', {
+      var geometry = new THREE.TextGeometry('', {
         size: 300,
         height: 10,
         curveSegments: 0,

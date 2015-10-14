@@ -18,17 +18,19 @@ app.controller('MainCtrl', function ($scope) {
 const run = async () => {
   try {
 
+    var numFloors = 10;
+
     window.sim = new Simulation({
       vizOptions: {
         worldSize: 10000,
-        numFloors: 4
+        numFloors: numFloors
       },
       simulationOptions: {
-        tickTime: 2000
+        tickTime: 200
       },
       buildingOptions: {
         name: 'QB',
-        numFloors: 4,
+        numFloors: numFloors,
         openingTime: 9,
         closingTime: 18,
         numElevators: 1,
@@ -39,20 +41,20 @@ const run = async () => {
         maxSpeed: 0.5,
         mode: 'normal',
         capacity: 8,
-        numFloors: 4,
+        numFloors: numFloors,
         onStateChange: (data) => { sim.onElevatorStateChanged(data) }
       },
       personOptions: {
         startTime: 9,
         finishTime: 18,
-        generateTargetFloor: (n) => { return Math.round(Math.random() * 1) + 1 }
+        generateTargetFloor: (n) => { return Math.round(Math.random() * (numFloors - 2)) + 1 }
       }
     });
     console.log('simulation', sim);
 
     sim.setDebug(true);
     sim.start();
-    // sim.runFor(10);
+    sim.runFor(80);
 
     /*var maxInt = 1000;
     var i = 0;
