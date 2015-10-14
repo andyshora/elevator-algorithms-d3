@@ -56,9 +56,13 @@ class Simulation {
   tick() {
     this.building.workElevators(this.currentTime);
     this._t++;
-    this.viz.onTick({
-      floors: this.building.getFloorData()
-    });
+
+    if (this.viz) {
+      this.viz.onTick({
+        floors: this.building.getFloorData()
+      });
+    }
+
   }
 
   get currentTime() {

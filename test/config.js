@@ -8,13 +8,15 @@ export default {
     openingTime: 9,
     closingTime: 18,
     numElevators: 1,
-    numPeople: 20
+    numPeople: 20,
+    onTick: (data) => {}
   },
   elevatorOptions: {
     maxSpeed: 0.5,
     capacity: 8,
     mode: 'normal',
-    numFloors: 4
+    numFloors: 4,
+    onStateChange: (data) => {}
   },
   personOptions: {
     startTime: 9,

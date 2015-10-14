@@ -10,8 +10,8 @@
 
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="stylesheet" href="css/main.css">
-  <!-- <script src="js/vendor/angular.min.js"></script>
-  <script src="js/vendor/angular-resource.min.js"></script> -->
+  <script src="js/vendor/angular.min.js"></script>
+  <script src="js/vendor/angular-resource.min.js"></script>
   <script src="js/vendor/lodash.min.js"></script>
   <script src="js/vendor/three.min.js"></script>
   <script src="js/vendor/underscore-min.js"></script>
@@ -69,13 +69,17 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
 
 </head>
-<body ng-controller="MainCtrl" ng-cloak>
+<body ng-controller="MainCtrl">
 
   <div class="description">
     <h1>Elevator Algorithms in D3</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus sint, voluptatum autem expedita consequuntur perspiciatis voluptas consequatur quisquam, ipsum doloribus.</p>
   </div>
   <div class="simulation" id="WebGLCanvas"></div>
+
+  <div class="controls">
+    <button ng-click="onTickButtonClicked()">Tick</button>
+  </div>
 
   <script src="js/main.min.js"></script>
 

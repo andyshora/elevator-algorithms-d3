@@ -6,13 +6,17 @@
 import 'babel/polyfill';
 import {Simulation} from './lib/Simulation';
 
-let app = null;
+let app = angular.module('SimulationApp', ['ngResource']);
 let sim = null;
+
+app.controller('MainCtrl', function ($scope) {
+  $scope.onTickButtonClicked = function() {
+    sim.tick();
+  };
+});
 
 const run = async () => {
   try {
-
-    // app = angular.module('SimulationApp', ['ngResource']);
 
     sim = new Simulation({
       vizOptions: {
@@ -48,7 +52,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(10);
+    // sim.runFor(10);
 
     /*var maxInt = 1000;
     var i = 0;

@@ -777,5 +777,13 @@ h1, h2, h3, h4, h5, p {
   Component Styles
 -----------------------------------------------------------------------*
  */
+.controls {
+  width: 200px;
+  height: 100px;
+  background: darkGrey;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1; }
 
 /*# sourceMappingURL=main.css.map */

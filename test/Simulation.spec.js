@@ -43,6 +43,15 @@ describe('The Simulation', () => {
     expect(sim.building.elevators[0].state).to.be.equal('starting');
   });
 
+  it('should have an elevator with no passengers left after 3 ticks', function() {
+    // first tick will load the elevator
+    // second tick will be travelling
+    sim.tick();
+    sim.tick();
+    sim.tick();
+    expect(sim.building.elevators[0].people.length).to.be.equal(0);
+  });
+
   xit('should have an elevator travelling after 2 ticks', function() {
     // first tick will load the elevator
     // second tick will be travelling

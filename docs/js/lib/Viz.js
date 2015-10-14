@@ -307,7 +307,7 @@ var Viz = (function () {
   }, {
     key: 'onTick',
     value: function onTick(data) {
-      console.log('onTick', data);
+      // console.log('onTick', data);
       for (var i = 0; i < data.floors.length; i++) {
         this.updateFloorLabel(i, data.floors[i].length);
       }

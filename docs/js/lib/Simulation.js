@@ -84,9 +84,12 @@ var Simulation = (function () {
     value: function tick() {
       this.building.workElevators(this.currentTime);
       this._t++;
-      this.viz.onTick({
-        floors: this.building.getFloorData()
-      });
+
+      if (this.viz) {
+        this.viz.onTick({
+          floors: this.building.getFloorData()
+        });
+      }
     }
   }, {
     key: 'currentTime',
