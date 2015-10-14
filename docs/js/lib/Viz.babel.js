@@ -237,7 +237,7 @@ class Viz {
     this.elevatorLabel.position.set(0, -r + (data.floor * this.floorHeight), r + (this.floorHeight / 8) + 50);
 
     // todo - update label text
-    this.elevatorLabel.geometry = new THREE.TextGeometry('passengers: ' + data.numPeople, {
+    this.elevatorLabel.geometry = new THREE.TextGeometry('Passengers: ' + data.numPeople, {
       size: 300,
       height: 10,
       curveSegments: 0,
@@ -273,7 +273,7 @@ class Viz {
     this.scene.add(line);
 
     // label
-    var geometry = new THREE.TextGeometry('passengers: 0', {
+    var geometry = new THREE.TextGeometry('Passengers: 0', {
       size: 300,
       height: 10,
       curveSegments: 0,

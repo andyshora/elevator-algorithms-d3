@@ -7,7 +7,7 @@ import 'babel/polyfill';
 import {Simulation} from './lib/Simulation';
 
 let app = angular.module('SimulationApp', ['ngResource']);
-let sim = null;
+// let sim = null;
 
 app.controller('MainCtrl', function ($scope) {
   $scope.onTickButtonClicked = function() {
@@ -18,7 +18,7 @@ app.controller('MainCtrl', function ($scope) {
 const run = async () => {
   try {
 
-    sim = new Simulation({
+    window.sim = new Simulation({
       vizOptions: {
         worldSize: 10000,
         numFloors: 4

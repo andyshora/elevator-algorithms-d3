@@ -25,7 +25,6 @@ var Person = (function () {
     this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
     this._targetFloor = options.generateTargetFloor(n);
-    console.log('this._targetFloor', this._targetFloor);
 
     this._mock = new _chance.Chance();
     this._name = this._mock.name();
