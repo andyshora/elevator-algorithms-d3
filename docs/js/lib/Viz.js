@@ -206,6 +206,7 @@ var Viz = (function () {
 
       this.drawGrid();
       this.drawElevator();
+      this.addLights();
 
       this.scene.add(this.camera);
       // this.scene.add(this.pointCloud);
@@ -214,6 +215,16 @@ var Viz = (function () {
       // window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
       // window.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    }
+  }, {
+    key: 'addLights',
+    value: function addLights() {
+      // var light = new THREE.PointLight(0xffffff);
+      // light.position.set(0, 150, 100);
+      // this.scene.add(light);
+
+      var light2 = new THREE.AmbientLight(0xffffff);
+      this.scene.add(light2);
     }
   }, {
     key: 'updateCubePosition',
@@ -249,7 +260,7 @@ var Viz = (function () {
       var r = this.WORLD_SIZE / 2;
 
       var geometry = new THREE.BoxGeometry(this.floorHeight / 4, this.floorHeight / 4, this.floorHeight / 4);
-      var material = new THREE.MeshNormalMaterial({ color: 0xff0000 });
+      var material = new THREE.MeshNormalMaterial({ color: 0x262626 });
       this.cube = new THREE.Mesh(geometry, material);
 
       this.cube.position.set(0, -r + this.floorHeight / 8, r);
@@ -317,8 +328,15 @@ var Viz = (function () {
     value: function drawGrid() {
       var r = this.WORLD_SIZE / 2;
 
+      var edgeMaterial1 = new THREE.LineBasicMaterial({
+        color: 0x34E97C
+      });
+
+      var edgeMaterial2 = new THREE.LineBasicMaterial({
+        color: 0x505050
+      });
       var material = new THREE.LineBasicMaterial({
-        color: 0x666666
+        color: 0x262626
       });
 
       var startVal = -r;
@@ -347,23 +365,38 @@ var Viz = (function () {
           extrudeMaterial: 1
         });
         var label = new THREE.Mesh(geometry, textMaterial);
-        label.position.set(0, -r + j * floorHeight, 0);
+        label.position.set(-r + floorHeight * 0.25, -r + j * floorHeight + 0.2 * floorHeight, r * 0.8);
         this.scene.add(label);
         this.floorText.push(label);
 
         for (var i = 0; i <= numDivisions; i++) {
 
+          var atEdge = i % numDivisions === 0;
+
+          // draw line front-to-back
           var geometry = new THREE.Geometry();
           geometry.vertices.push(new THREE.Vector3(startVal + divisionLength * i, -r + j * floorHeight, -r));
           geometry.vertices.push(new THREE.Vector3(startVal + divisionLength * i, -r + j * floorHeight, r));
-          var line = new THREE.Line(geometry, material);
-          this.scene.add(line);
 
+          // bottom floor, draw whole grid
+          if (!j || atEdge) {
+            var mat = atEdge ? edgeMaterial2 : material;
+            var line = new THREE.Line(geometry, mat);
+            this.scene.add(line);
+          }
+
+          // draw line across
           var geometry = new THREE.Geometry();
           geometry.vertices.push(new THREE.Vector3(-r, -r + j * floorHeight, startVal + divisionLength * i));
           geometry.vertices.push(new THREE.Vector3(r, -r + j * floorHeight, startVal + divisionLength * i));
-          var line = new THREE.Line(geometry, material);
-          this.scene.add(line);
+
+          // bottom floor, draw whole grid
+          if (!j || atEdge) {
+            var mat = i === numDivisions ? edgeMaterial1 : material;
+            var line = new THREE.Line(geometry, mat);
+            this.scene.add(line);
+          }
+          // var line = new THREE.Line(geometry, mat);
         }
       }
     }

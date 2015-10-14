@@ -86,13 +86,15 @@ class Elevator {
   }
 
   unloadPerson() {
-    var p = _.last(this.getPeopleForFloor(this.currentFloor));
+    var peopleForFloor = this.getPeopleForFloor(this.currentFloor);
+    var p = _.last(peopleForFloor);
     Utils.log('Unloading person', p);
     if (typeof p === 'undefined') {
       Utils.log('returning');
       return false;
     }
-    this._people.pop();
+
+    _.remove(this._people, (person) => { person.id === p.id });
 
     return p;
   }

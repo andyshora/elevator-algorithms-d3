@@ -115,13 +115,17 @@ var Elevator = (function () {
   }, {
     key: 'unloadPerson',
     value: function unloadPerson() {
-      var p = _lodash2['default'].last(this.getPeopleForFloor(this.currentFloor));
+      var peopleForFloor = this.getPeopleForFloor(this.currentFloor);
+      var p = _lodash2['default'].last(peopleForFloor);
       _Utils.Utils.log('Unloading person', p);
       if (typeof p === 'undefined') {
         _Utils.Utils.log('returning');
         return false;
       }
-      this._people.pop();
+
+      _lodash2['default'].remove(this._people, function (person) {
+        person.id === p.id;
+      });
 
       return p;
     }

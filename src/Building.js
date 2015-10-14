@@ -24,6 +24,8 @@ class Building {
     for (var i = 0; i < this._numPeople; i++) {
       this._people.push(new Person(personOptions, i));
     }
+
+    // Utils.log('setup people', this._people);
   }
 
   getFloorData() {
@@ -72,17 +74,20 @@ class Building {
         }
       }
 
-      this._elevators[i].updateState('starting');
+      this._elevators[i].updateState('open');
 
     }
 
     for (let i = 0; i < this._elevators.length; i++) {
+      this._elevators[i].updateState('closed');
       this._elevators[i].setTargetFloors(this._numFloors);
     }
 
     // elevators should travel one tick
     for (let i = 0; i < this._elevators.length; i++) {
+      this._elevators[i].updateState('starting');
       this._elevators[i].travelOneTick();
+      this._elevators[i].updateState('stopping');
     }
 
     Utils.log(`----------- tick ${t} over -------------`);
