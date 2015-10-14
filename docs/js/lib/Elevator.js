@@ -63,8 +63,8 @@ var Elevator = (function () {
     value: function travelOneTick() {
 
       if (!this.targetFloors.length) {
-        // no people? go down
-        this._direction = -1;
+        // no people? go down unless we're on ground floor
+        this._direction = !this._currentFloor ? 0 : -1;
       } else if (this._currentFloor === 0 && this._people.length) {
         // at the bottom and people loaded
 

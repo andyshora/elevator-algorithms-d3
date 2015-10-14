@@ -18,7 +18,7 @@ app.controller('MainCtrl', function ($scope) {
 const run = async () => {
   try {
 
-    var numFloors = 10;
+    var numFloors = 3;
 
     window.sim = new Simulation({
       vizOptions: {
@@ -26,7 +26,7 @@ const run = async () => {
         numFloors: numFloors
       },
       simulationOptions: {
-        tickTime: 200
+        tickTime: 100
       },
       buildingOptions: {
         name: 'QB',
@@ -55,6 +55,7 @@ const run = async () => {
     sim.setDebug(true);
     sim.start();
     sim.runFor(80);
+
 
     /*var maxInt = 1000;
     var i = 0;

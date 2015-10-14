@@ -25,6 +25,7 @@ var Person = (function () {
     this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
     this._targetFloor = options.generateTargetFloor(n);
+    this._waitTime = 0;
 
     this._mock = new _chance.Chance();
     this._name = this._mock.name();
@@ -45,6 +46,11 @@ var Person = (function () {
         this._targetFloor = null;
       }
     }
+  }, {
+    key: 'incWaitTime',
+    value: function incWaitTime() {
+      this._waitTime++;
+    }
 
     // ------ GETTERS ------
   }, {
@@ -56,6 +62,11 @@ var Person = (function () {
     key: 'finishTime',
     get: function get() {
       return this._finishTime;
+    }
+  }, {
+    key: 'waitTime',
+    get: function get() {
+      return this._waitTime;
     }
   }, {
     key: 'state',

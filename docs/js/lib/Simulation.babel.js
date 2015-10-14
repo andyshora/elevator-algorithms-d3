@@ -10,9 +10,9 @@ class Simulation {
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
-    if (typeof window !== 'undefined') {
-      this.viz = new Viz(args.vizOptions);
-    }
+    // if (typeof window !== 'undefined') {
+    //   this.viz = new Viz(args.vizOptions);
+    // }
   }
 
   setDebug(val) {
@@ -29,11 +29,15 @@ class Simulation {
 
   // update viz
   onElevatorStateChanged(data) {
-    this.viz.onElevatorStateChanged(data);
+    if (this.viz) {
+      this.viz.onElevatorStateChanged(data);
+    }
   }
 
   updatePosition(i) {
-    this.viz.updateCubePosition(i);
+    if (this.viz) {
+      this.viz.updateCubePosition(i);
+    }
   }
 
   runFor(i) {
@@ -42,9 +46,16 @@ class Simulation {
       this.tick();
       j++;
       if (j > i) {
+
+        var waitTime = this.getAvgWaitTime();
+        console.log('Avg wait time: ' + waitTime + ' ticks');
         clearInterval(interval);
       }
     }, this.tickTime);
+  }
+
+  getAvgWaitTime() {
+    return this.building.getAvgWaitTime();
   }
 
   /**

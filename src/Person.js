@@ -9,6 +9,7 @@ class Person {
     this._state = 'waiting'; // all people are initially waiting on ground floor
     this._currentFloor = 0;
     this._targetFloor = options.generateTargetFloor(n);
+    this._waitTime = 0;
 
     this._mock = new Chance();
     this._name = this._mock.name();
@@ -25,6 +26,9 @@ class Person {
       this._targetFloor = null;
     }
   }
+  incWaitTime() {
+    this._waitTime++;
+  }
 
   // ------ GETTERS ------
   get startTime() {
@@ -32,6 +36,9 @@ class Person {
   }
   get finishTime() {
     return this._finishTime;
+  }
+  get waitTime() {
+    return this._waitTime;
   }
   get state() {
     return this._state;

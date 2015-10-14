@@ -57,6 +57,15 @@ var Building = (function () {
       return arr;
     }
   }, {
+    key: 'getAvgWaitTime',
+    value: function getAvgWaitTime() {
+      var total = 0;
+      for (var i = 0; i < this._people.length; i++) {
+        total += this._people[i].waitTime;
+      }
+      return total / this._people.length;
+    }
+  }, {
     key: 'workElevators',
     value: function workElevators(t) {
       _Utils.Utils.log('----------- begin tick ' + t + ' -------------');
@@ -74,7 +83,7 @@ var Building = (function () {
           _Utils.Utils.log('Unloading elevator ' + i + ' at floor ' + floor, peopleForFloor);
 
           while (p = this._elevators[i].unloadPerson()) {
-            _Utils.Utils.log('   ' + p.name + ' (id:' + p.id + ') got off');
+            _Utils.Utils.log('   ' + p.name + ' (id:' + p.id + ') got off. Wait time: ' + p.waitTime);
             p.updateState(floor, 'resting');
           }
         }
@@ -90,6 +99,11 @@ var Building = (function () {
             this._elevators[i].loadPerson(peopleWaiting[k]);
             peopleWaiting[k].updateState(floor, 'travelling');
             k++;
+          }
+          // inc wait time for all others
+          var peopleWaitingOnAllFloors = this.getPeopleWaitingOnAllFloors();
+          for (var n = 0; n < peopleWaitingOnAllFloors.length; n++) {
+            peopleWaitingOnAllFloors[n].incWaitTime();
           }
         }
 
@@ -114,6 +128,11 @@ var Building = (function () {
     key: 'getPeopleWaitingOnFloor',
     value: function getPeopleWaitingOnFloor(n) {
       return _lodash2['default'].filter(this._people, { currentFloor: n, state: 'waiting' });
+    }
+  }, {
+    key: 'getPeopleWaitingOnAllFloors',
+    value: function getPeopleWaitingOnAllFloors() {
+      return _lodash2['default'].filter(this._people, { state: 'waiting' });
     }
   }, {
     key: 'getElevatorsWaitingOnFloor',

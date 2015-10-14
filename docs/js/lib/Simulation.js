@@ -28,9 +28,9 @@ var Simulation = (function () {
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new _Building.Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
-    if (typeof window !== 'undefined') {
-      this.viz = new _Viz.Viz(args.vizOptions);
-    }
+    // if (typeof window !== 'undefined') {
+    //   this.viz = new Viz(args.vizOptions);
+    // }
   }
 
   _createClass(Simulation, [{
@@ -51,12 +51,16 @@ var Simulation = (function () {
   }, {
     key: 'onElevatorStateChanged',
     value: function onElevatorStateChanged(data) {
-      this.viz.onElevatorStateChanged(data);
+      if (this.viz) {
+        this.viz.onElevatorStateChanged(data);
+      }
     }
   }, {
     key: 'updatePosition',
     value: function updatePosition(i) {
-      this.viz.updateCubePosition(i);
+      if (this.viz) {
+        this.viz.updateCubePosition(i);
+      }
     }
   }, {
     key: 'runFor',
@@ -68,9 +72,17 @@ var Simulation = (function () {
         _this.tick();
         j++;
         if (j > i) {
+
+          var waitTime = _this.getAvgWaitTime();
+          console.log('Avg wait time: ' + waitTime + ' ticks');
           clearInterval(interval);
         }
       }, this.tickTime);
+    }
+  }, {
+    key: 'getAvgWaitTime',
+    value: function getAvgWaitTime() {
+      return this.building.getAvgWaitTime();
     }
 
     /**

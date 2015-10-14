@@ -37,6 +37,14 @@ class Building {
     return arr;
   }
 
+  getAvgWaitTime() {
+    var total = 0;
+    for (let i = 0; i < this._people.length; i++) {
+      total += this._people[i].waitTime;
+    }
+    return total / this._people.length;
+  }
+
   workElevators(t) {
     Utils.log(`----------- begin tick ${t} -------------`);
 
@@ -55,7 +63,7 @@ class Building {
         Utils.log(`Unloading elevator ${i} at floor ${floor}`, peopleForFloor);
 
         while (p = this._elevators[i].unloadPerson()) {
-          Utils.log(`   ${p.name} (id:${p.id}) got off`);
+          Utils.log(`   ${p.name} (id:${p.id}) got off. Wait time: ${p.waitTime}`);
           p.updateState(floor, 'resting');
         }
       }
@@ -71,6 +79,11 @@ class Building {
           this._elevators[i].loadPerson(peopleWaiting[k]);
           peopleWaiting[k].updateState(floor, 'travelling');
           k++;
+        }
+        // inc wait time for all others
+        var peopleWaitingOnAllFloors = this.getPeopleWaitingOnAllFloors();
+        for (var n = 0; n < peopleWaitingOnAllFloors.length; n++) {
+          peopleWaitingOnAllFloors[n].incWaitTime();
         }
       }
 
@@ -95,6 +108,10 @@ class Building {
 
   getPeopleWaitingOnFloor(n) {
     return _.filter(this._people, { currentFloor: n, state: 'waiting' });
+  }
+
+  getPeopleWaitingOnAllFloors() {
+    return _.filter(this._people, { state: 'waiting' });
   }
 
   getElevatorsWaitingOnFloor(n) {

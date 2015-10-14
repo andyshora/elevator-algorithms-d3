@@ -268,7 +268,7 @@ var Viz = (function () {
 
       // draw line down to cube
       var material = new THREE.LineBasicMaterial({
-        color: 0xcccccc
+        color: 0x505050
       });
 
       var geometry = new THREE.Geometry();
@@ -276,6 +276,10 @@ var Viz = (function () {
       geometry.vertices.push(new THREE.Vector3(0, r, r));
       var line = new THREE.Line(geometry, material);
       this.scene.add(line);
+
+      var material = new THREE.LineBasicMaterial({
+        color: 0xcccccc
+      });
 
       // label
       var geometry = new THREE.TextGeometry('', {
@@ -290,7 +294,7 @@ var Viz = (function () {
         extrudeMaterial: 1
       });
       this.elevatorLabel = new THREE.Mesh(geometry, material);
-      this.elevatorLabel.position.set(0, -r, r + this.floorHeight / 8 + 50);
+      this.elevatorLabel.position.set(0, -r, r + this.floorHeight / 8);
       this.scene.add(this.elevatorLabel);
     }
   }, {
