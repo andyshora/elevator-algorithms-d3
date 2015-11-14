@@ -23,7 +23,8 @@ const run = async () => {
     window.sim = new Simulation({
       vizOptions: {
         worldSize: 10000,
-        numFloors: numFloors
+        numFloors: numFloors,
+        selector: '#viz-container'
       },
       simulationOptions: {
         tickTime: 100
@@ -54,7 +55,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    sim.runFor(80);
+    // sim.runFor(80);
 
 
     /*var maxInt = 1000;

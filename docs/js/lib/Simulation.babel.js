@@ -1,18 +1,19 @@
 import {Building} from './Building';
-import {Viz} from './Viz';
+import {D3Viz} from './D3Viz';
 import {Utils} from './Utils';
 import _ from 'lodash';
 
 class Simulation {
 
   constructor(args) {
+    console.log('Simulation constructor', args);
     this._t = 0;
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
-    // if (typeof window !== 'undefined') {
-    //   this.viz = new Viz(args.vizOptions);
-    // }
+    if (typeof window !== 'undefined') {
+      this.viz = new D3Viz(args);
+    }
   }
 
   setDebug(val) {

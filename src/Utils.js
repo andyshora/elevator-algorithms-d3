@@ -21,6 +21,23 @@ class Utils {
     }
     window.debug = val;
   }
+
+  static applyBoxStyle(selector) {
+    selector
+      .style('stroke', '#ecf469')
+      .style('fill', '#000000')
+  }
+
+  static applyClearBoxStyle(selector) {
+    selector
+      .style('fill', '#000000')
+  }
+
+  static applyTextStyle(selector) {
+    selector
+      .style('fill', '#ecf469')
+  }
+
 }
 
 export default { Utils };

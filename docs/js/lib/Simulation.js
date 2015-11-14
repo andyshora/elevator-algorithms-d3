@@ -12,7 +12,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _Building = require('./Building');
 
-var _Viz = require('./Viz');
+var _D3Viz = require('./D3Viz');
 
 var _Utils = require('./Utils');
 
@@ -24,13 +24,14 @@ var Simulation = (function () {
   function Simulation(args) {
     _classCallCheck(this, Simulation);
 
+    console.log('Simulation constructor', args);
     this._t = 0;
     this.tickTime = args.simulationOptions.tickTime;
     this.building = new _Building.Building(args.buildingOptions, args.personOptions, args.elevatorOptions);
 
-    // if (typeof window !== 'undefined') {
-    //   this.viz = new Viz(args.vizOptions);
-    // }
+    if (typeof window !== 'undefined') {
+      this.viz = new _D3Viz.D3Viz(args);
+    }
   }
 
   _createClass(Simulation, [{

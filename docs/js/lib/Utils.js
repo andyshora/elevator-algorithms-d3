@@ -45,6 +45,21 @@ var Utils = (function () {
       }
       window.debug = val;
     }
+  }, {
+    key: 'applyBoxStyle',
+    value: function applyBoxStyle(selector) {
+      selector.style('stroke', '#ecf469').style('fill', '#000000');
+    }
+  }, {
+    key: 'applyClearBoxStyle',
+    value: function applyClearBoxStyle(selector) {
+      selector.style('fill', '#000000');
+    }
+  }, {
+    key: 'applyTextStyle',
+    value: function applyTextStyle(selector) {
+      selector.style('fill', '#ecf469');
+    }
   }]);
 
   return Utils;
