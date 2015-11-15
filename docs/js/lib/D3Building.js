@@ -55,11 +55,16 @@ var D3Building = (function () {
         // floor label
         var labelGroup = this._floors[i].append('g');
 
-        labelGroup.append('rect').attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + 1).attr('y', 0).attr('width', labelWidth).attr('height', labelWidth).call(_Utils.Utils.applyClearBoxStyle);
+        /*labelGroup.append('rect')
+          .attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + 1)
+          .attr('y', 0)
+          .attr('width', labelWidth)
+          .attr('height', labelWidth)
+          .call(Utils.applyBoxStyle);*/
 
-        labelGroup.append('text').text(function () {
-          return '' + i;
-        }).attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + labelWidth / 2).attr('y', labelWidth / 2).attr('text-anchor', 'middle').attr('font-size', labelWidth / 2 + 'px').attr('font-size', labelWidth / 2 + 'px').attr('dominant-baseline', 'central').call(_Utils.Utils.applyTextStyle);
+        labelGroup.append('text').attr('id', 'floor-label-' + i).text(function () {
+          return 'Floor ' + i;
+        }).attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + labelWidth / 2).attr('y', this._dimensions.floorHeight / 2 - labelWidth / 4).attr('font-size', labelWidth / 2 + 'px').attr('dominant-baseline', 'central').call(_Utils.Utils.applyTextStyle);
       }
 
       // draw elevators

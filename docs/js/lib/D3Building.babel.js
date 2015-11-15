@@ -50,19 +50,18 @@ class D3Building {
       // floor label
       var labelGroup = this._floors[i].append('g');
 
-      labelGroup.append('rect')
+      /*labelGroup.append('rect')
         .attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + 1)
         .attr('y', 0)
         .attr('width', labelWidth)
         .attr('height', labelWidth)
-        .call(Utils.applyClearBoxStyle);
+        .call(Utils.applyBoxStyle);*/
 
       labelGroup.append('text')
-        .text(function() { return '' + i })
+        .attr('id', `floor-label-${i}`)
+        .text(function() { return `Floor ${i}` })
         .attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + (labelWidth / 2))
-        .attr('y', (labelWidth / 2))
-        .attr('text-anchor', 'middle')
-        .attr('font-size', `${labelWidth / 2}px`)
+        .attr('y', (this._dimensions.floorHeight / 2) - (labelWidth / 4))
         .attr('font-size', `${labelWidth / 2}px`)
         .attr('dominant-baseline', 'central')
         .call(Utils.applyTextStyle);
