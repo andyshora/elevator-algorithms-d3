@@ -28,6 +28,11 @@ class Utils {
       .style('fill', '#000000')
   }
 
+  static applyAltLineStyle(selector) {
+    selector
+      .style('fill', '#5e612a')
+  }
+
   static applyClearBoxStyle(selector) {
     selector
       .style('fill', '#000000')

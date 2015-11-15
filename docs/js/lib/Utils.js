@@ -51,6 +51,11 @@ var Utils = (function () {
       selector.style('stroke', '#ecf469').style('fill', '#000000');
     }
   }, {
+    key: 'applyAltLineStyle',
+    value: function applyAltLineStyle(selector) {
+      selector.style('fill', '#5e612a');
+    }
+  }, {
     key: 'applyClearBoxStyle',
     value: function applyClearBoxStyle(selector) {
       selector.style('fill', '#000000');

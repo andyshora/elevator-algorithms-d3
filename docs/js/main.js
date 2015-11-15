@@ -34,7 +34,7 @@ const run = async () => {
         numFloors: numFloors,
         openingTime: 9,
         closingTime: 18,
-        numElevators: 2,
+        numElevators: 10,
         numPeople: 100,
         onTick: (data) => { sim.onTick(data) }
       },
