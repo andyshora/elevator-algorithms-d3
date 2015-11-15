@@ -42,6 +42,7 @@ class D3Viz {
       .attr('y', 0)
       .attr('width', this._sideLength)
       .attr('height', this._sideLength);
+
     this._d3Building.init(this._svgContainer);
 
   }

@@ -47,6 +47,7 @@ var D3Viz = (function () {
 
       // viz background
       this._svgContainer.append('rect').attr('x', 0).attr('y', 0).attr('width', this._sideLength).attr('height', this._sideLength);
+
       this._d3Building.init(this._svgContainer);
     }
   }, {

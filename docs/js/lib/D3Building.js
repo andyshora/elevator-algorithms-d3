@@ -26,10 +26,11 @@ var D3Building = (function () {
       this._dimensions = {};
       this._dimensions.buildingHeight = this._options.sideLength; // allow buffer
       this._dimensions.floorHeight = Math.floor(this._dimensions.buildingHeight / this._options.numFloors);
-      console.log('building height', this._dimensions.buildingHeight);
-      console.log('floor height', this._dimensions.floorHeight);
+      this._dimensions.elevatorBuffer = 10;
+      this._dimensions.elevatorWidth = Math.floor((this._dimensions.floorHeight - (this._options.numElevators + 1) * this._dimensions.elevatorBuffer) / this._options.numElevators);
 
       this._floors = [];
+      this._elevators = [];
 
       for (var i = this._options.numFloors - 1; i >= 0; i--) {
         // floor group
@@ -52,6 +53,16 @@ var D3Building = (function () {
         labelGroup.append('text').text(function () {
           return '' + i;
         }).attr('x', startBuildingX + this._dimensions.floorHeight + labelWidth / 2).attr('y', labelWidth / 2).attr('text-anchor', 'middle').attr('font-size', labelWidth / 2 + 'px').attr('font-size', labelWidth / 2 + 'px').attr('dominant-baseline', 'central').call(_Utils.Utils.applyTextStyle);
+      }
+
+      // draw elevators
+      for (var i = 0; i < this._options.numElevators; i++) {
+        this._elevators.push(buildingGroup.append('g').attr('transform', 'translate(0, ' + this._options.numFloors * this._dimensions.floorHeight + ')').attr('id', 'elevator-' + i));
+      }
+
+      for (var i = 0; i < this._elevators.length; i++) {
+        var elevatorGroup = this._elevators[i].append('rect');
+        elevatorGroup.attr('x', startBuildingX + this._dimensions.elevatorBuffer + (this._dimensions.elevatorWidth + this._dimensions.elevatorBuffer) * i).attr('y', -this._dimensions.floorHeight / 2).attr('width', this._dimensions.elevatorWidth).attr('height', this._dimensions.floorHeight / 2).call(_Utils.Utils.applyBoxStyle);
       }
     }
   }]);
