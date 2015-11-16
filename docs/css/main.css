@@ -6,6 +6,15 @@
  * @author Andy Shora
  *
 **/
+/**
+ *
+ * Elevator Algorithms
+ * Variables
+ *
+ *
+ * @author Andy Shora
+ *
+**/
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 * {
   box-sizing: border-box;
@@ -778,12 +787,17 @@ h1, h2, h3, h4, h5, p {
 -----------------------------------------------------------------------*
  */
 .controls {
-  width: 200px;
+  width: 100px;
   height: 100px;
-  background: darkGrey;
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 1; }
+
+button {
+  border: 1px solid #ecf469;
+  background: black;
+  padding: 10px 15px;
+  color: #ecf469; }
 
 /*# sourceMappingURL=main.css.map */

@@ -19,6 +19,8 @@ const run = async () => {
   try {
 
     var numFloors = 3;
+    var tickTime = 1000;
+    var transitionDuration = tickTime * 0.8;
 
     window.sim = new Simulation({
       vizOptions: {
@@ -27,7 +29,7 @@ const run = async () => {
         selector: '#viz-container'
       },
       simulationOptions: {
-        tickTime: 100
+        tickTime: tickTime
       },
       buildingOptions: {
         name: 'QB',
@@ -35,7 +37,8 @@ const run = async () => {
         openingTime: 9,
         closingTime: 18,
         numElevators: 1,
-        numPeople: 100,
+        numPeople: 1000,
+        transitionDuration: transitionDuration,
         onTick: (data) => { sim.onTick(data) }
       },
       elevatorOptions: {
@@ -55,7 +58,7 @@ const run = async () => {
 
     sim.setDebug(true);
     sim.start();
-    // sim.runFor(80);
+    // sim.runFor(10);
 
 
     /*var maxInt = 1000;

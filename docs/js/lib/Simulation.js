@@ -100,7 +100,8 @@ var Simulation = (function () {
 
       if (this.viz) {
         this.viz.onTick({
-          floors: this.building.getFloorData()
+          floors: this.building.getFloorData(),
+          elevators: this.building.getElevatorData()
         });
       }
     }

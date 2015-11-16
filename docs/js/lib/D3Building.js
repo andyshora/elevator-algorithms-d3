@@ -64,7 +64,7 @@ var D3Building = (function () {
 
         labelGroup.append('text').attr('id', 'floor-label-' + i).text(function () {
           return 'Floor ' + i;
-        }).attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + labelWidth / 2).attr('y', this._dimensions.floorHeight / 2 - labelWidth / 4).attr('font-size', labelWidth / 2 + 'px').attr('dominant-baseline', 'central').call(_Utils.Utils.applyTextStyle);
+        }).attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + labelWidth / 2).attr('y', this._dimensions.floorHeight / 2 - labelWidth / 4).attr('font-size', '15px').attr('dominant-baseline', 'central').call(_Utils.Utils.applyTextStyle);
       }
 
       // draw elevators
@@ -87,15 +87,21 @@ var D3Building = (function () {
 
         elevatorCableJoin.attr('cx', elevatorXRelative + this._dimensions.elevatorWidth / 2).attr('cy', elevator.attr('y')).attr('r', Math.min(this._dimensions.elevatorWidth / 4, 10)).call(_Utils.Utils.applyBoxStyle);
       }
-
-      this.animateElevators();
     }
   }, {
-    key: 'animateElevators',
-    value: function animateElevators() {
-      for (var i = 0; i < this._elevators.length; i++) {
-        this._elevators[i].transition().duration(2000).attr('transform', 'translate(' + this._dimensions.startBuildingX + ', ' + this.getElevatorYPosAtFloor(this._options.numFloors - 1) + ')').transition().duration(2000).attr('transform', 'translate(' + this._dimensions.startBuildingX + ', ' + this.getElevatorYPosAtFloor(0) + ')');
-      }
+    key: 'animateElevator',
+    value: function animateElevator(i, targetFloorIndex) {
+      console.log('animateElevator', i, targetFloorIndex);
+      this._elevators[i].transition().duration(this._options.transitionDuration).attr('transform', 'translate(' + this._dimensions.startBuildingX + ', ' + this.getElevatorYPosAtFloor(targetFloorIndex) + ')');
+    }
+
+    // VIZ UPDATES
+  }, {
+    key: 'updateFloorLabel',
+    value: function updateFloorLabel(i, str) {
+      d3.select('#floor-label-' + i).text(function () {
+        return 'Floor ' + i + ': ' + str;
+      });
     }
   }]);
 

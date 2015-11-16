@@ -37,6 +37,15 @@ class Building {
     return arr;
   }
 
+  getElevatorData() {
+
+    /*var arr = [];
+    for (var i = 0; i < this.numElevators; i++) {
+      arr.push();
+    }*/
+    return this._elevators;
+  }
+
   getAvgWaitTime() {
     var total = 0;
     for (let i = 0; i < this._people.length; i++) {

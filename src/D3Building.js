@@ -62,7 +62,7 @@ class D3Building {
         .text(function() { return `Floor ${i}` })
         .attr('x', this._dimensions.startBuildingX + this._dimensions.floorWidth + (labelWidth / 2))
         .attr('y', (this._dimensions.floorHeight / 2) - (labelWidth / 4))
-        .attr('font-size', `${labelWidth / 2}px`)
+        .attr('font-size', `15px`)
         .attr('dominant-baseline', 'central')
         .call(Utils.applyTextStyle);
 
@@ -109,19 +109,21 @@ class D3Building {
 
     }
 
-    this.animateElevators();
   }
 
-  animateElevators() {
-    for (let i = 0; i < this._elevators.length; i++) {
-      this._elevators[i]
-        .transition()
-        .duration(2000)
-        .attr('transform', `translate(${this._dimensions.startBuildingX}, ${this.getElevatorYPosAtFloor(this._options.numFloors - 1)})`)
-        .transition()
-        .duration(2000)
-        .attr('transform', `translate(${this._dimensions.startBuildingX}, ${this.getElevatorYPosAtFloor(0)})`);
-    }
+
+  animateElevator(i, targetFloorIndex) {
+    console.log('animateElevator', i, targetFloorIndex);
+    this._elevators[i]
+      .transition()
+      .duration(this._options.transitionDuration)
+      .attr('transform', `translate(${this._dimensions.startBuildingX}, ${this.getElevatorYPosAtFloor(targetFloorIndex)})`);
+  }
+
+  // VIZ UPDATES
+  updateFloorLabel(i, str) {
+    d3.select(`#floor-label-${i}`)
+      .text(function() { return `Floor ${i}: ${str}` })
   }
 
 }

@@ -57,6 +57,16 @@ var Building = (function () {
       return arr;
     }
   }, {
+    key: 'getElevatorData',
+    value: function getElevatorData() {
+
+      /*var arr = [];
+      for (var i = 0; i < this.numElevators; i++) {
+        arr.push();
+      }*/
+      return this._elevators;
+    }
+  }, {
     key: 'getAvgWaitTime',
     value: function getAvgWaitTime() {
       var total = 0;

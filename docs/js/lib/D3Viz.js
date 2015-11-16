@@ -50,6 +50,30 @@ var D3Viz = (function () {
 
       this._d3Building.init(this._svgContainer);
     }
+
+    /**
+     * After a tick has been processed
+     * update this vizualisation to reflect the current state
+     * @param  {object} data The building data
+     * @return {void}
+     */
+  }, {
+    key: 'onTick',
+    value: function onTick(data) {
+      console.log('onTick', data);
+      for (var i = 0; i < data.floors.length; i++) {
+        this._d3Building.updateFloorLabel(i, data.floors[i].length + ' people');
+      }
+
+      for (var i = 0; i < data.elevators.length; i++) {
+        this._d3Building.animateElevator(i, data.elevators[i].currentFloor);
+      }
+    }
+  }, {
+    key: 'onElevatorStateChanged',
+    value: function onElevatorStateChanged(data) {
+      console.log('viz, onElevatorStateChanged', data);
+    }
   }, {
     key: 'render',
     value: function render() {}
